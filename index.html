@@ -381,6 +381,45 @@
             mudarCategoria(btn.dataset.cat);
           })
         });
+
+         const menuBtn = document.getElementById("menu-btn");
+  const menu = document.getElementById("menu");
+  const linhas = document.querySelectorAll("#menu-btn .linha");
+
+  let aberto = false;
+
+  menuBtn.addEventListener("click", () => {
+    aberto = !aberto;
+
+    // Mostra / esconde menu
+    menu.classList.toggle("hidden");
+
+    if (aberto) {
+      // Transformar em X
+      linhas[0].classList.add("rotate-45", "translate-y-1.5");
+      linhas[1].classList.add("opacity-0");
+      linhas[2].classList.add("-rotate-45", "-translate-y-1.5");
+    } else {
+      // Voltar para hamburguer
+      linhas[0].classList.remove("rotate-45", "translate-y-1.5");
+      linhas[1].classList.remove("opacity-0");
+      linhas[2].classList.remove("-rotate-45", "-translate-y-1.5");
+    }
+  });
+
+  // Fecha o menu ao clicar em uma opção (mobile)
+  document.querySelectorAll("#menu a").forEach(link => {
+    link.addEventListener("click", () => {
+      if (window.innerWidth < 768) {
+        menu.classList.add("hidden");
+        aberto = false;
+
+        linhas[0].classList.remove("rotate-45", "translate-y-1.5");
+        linhas[1].classList.remove("opacity-0");
+        linhas[2].classList.remove("-rotate-45", "-translate-y-1.5");
+      }
+    });
+  });
    </script>
 
 </body>
